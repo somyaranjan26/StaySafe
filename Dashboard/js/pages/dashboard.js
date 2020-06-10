@@ -25,7 +25,6 @@ function LoadCustomers() {
   var CountToday = 0;
   var CurrentMonth = new Date().getMonth() + 1;
   var TodayDate = new Date().getDate();
-  console.log(TodayDate, CurrentMonth)
 
   firestore
     .collection(localStorage.getItem("locationTag")+"/Scanned/Data")
@@ -41,7 +40,6 @@ function LoadCustomers() {
         ((mydata.ScannedDate == TodayDate) && (mydata.ScannedMonth == CurrentMonth))?CountToday++:null;
         
 
-        console.log(CountMonth)
         var date = mydata.ScannedDate+'/'+mydata.ScannedMonth+'/'+mydata.ScannedYear;
         var time = mydata.ScannedTime;
         var name = mydata.Name;

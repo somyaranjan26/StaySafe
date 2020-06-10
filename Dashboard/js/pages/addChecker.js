@@ -26,8 +26,8 @@ function addChecker() {
     emSubmit.onclick = function () {
 
         console.log("firebase intialized");
-        console.log(emLocTag);
-        console.log(emMobNum.value);
+        // console.log(emLocTag);
+        // console.log(emMobNum.value);
 
         docRef = firestore.collection('CheckerLogin').doc(emMobNum.value);
         var setWithMerge = docRef.set({

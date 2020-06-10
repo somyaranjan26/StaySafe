@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staysafe | Login</title>
+  <link rel="shortcut icon" href="/assets/img/StayHome-Icon.png" type="image/x-icon">
+
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-firestore.js"></script>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script src="/Dashboard/js/pages/login.js"></script>
+
+  <style type="text/css">
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600&display=swap");
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      text-align: right;
+      overflow: hidden;
+    }
+
+    nav a {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      padding: 14px 16px;
+      font-size: 17px;
+      font-family: sans-serif;
+    }
+
+    nav a.active {
+      background-color: #5A18C9;
+      color: #EBF7D4;
+    }
+
+    nav a:hover {
+      background-color: #EBF7D4;
+      color: #190934;
+    }
+
+    @media screen and (max-width: 600px) {
+      .largeNav {
+        display: none;
+      }
+
+      details {
+        display: inline;
+        padding: 25px;
+        text-align: cetner;
+        width: 90%;
+        font-size: 24px;
+        margin-right: 25px;
+      }
+
+      details a {
+        display: grid;
+        justify-content: center;
+        text-align: center;
+      }
+
+      details a:hover {
+        background-color: #EBF7D4;
+        color: #190934;
+      }
+    }
+
+    header {
+      position: relative;
+    }
+
+    .stripes {
+      display: grid;
+      grid: repeat(4, 1fr)/repeat(6, 1fr);
+      -webkit-transform: skewY(-10deg);
+      transform: skewY(-10deg);
+      -webkit-transform-origin: 0;
+      transform-origin: 0;
+      position: absolute;
+      top: 0;
+      z-index: -1;
+      height: 650px;
+      width: 100%;
+      background: -webkit-gradient(linear, left bottom, left top, from(#2684ff), to(#0065ff));
+      background: linear-gradient(to top, #2684ff, #0065ff);
+    }
+
+    .stripes>* {
+      opacity: 0.75;
+      mix-blend-mode: soft-light;
+    }
+
+    .stripes>*:nth-of-type(odd) {
+      background: -webkit-gradient(linear, right top, left top, color-stop(35%, transparent), to(#b3d4ff));
+      background: linear-gradient(270deg, transparent 35%, #b3d4ff 100%);
+    }
+
+    .stripes>*:nth-of-type(even) {
+      background: -webkit-gradient(linear, left top, right top, color-stop(35%, transparent), to(#b3d4ff));
+      background: linear-gradient(90deg, transparent 35%, #b3d4ff 100%);
+    }
+
+    .stripes>*:nth-child(1) {
+      grid-column: 1 / span 4;
+      grid-row: 1;
+    }
+
+    .stripes>*:nth-child(2) {
+      grid-column: 2 / span 5;
+      grid-row: 2;
+    }
+
+    .stripes>*:nth-child(3) {
+      grid-column: 2 / span 5;
+      grid-row: 3;
+    }
+
+    .stripes>*:nth-child(4) {
+      grid-column: 1 / span 2;
+      grid-row: 4;
+    }
+
+    .stripes>*:nth-child(5) {
+      grid-column: 6 / span 1;
+      grid-row: 4;
+    }
+
+    .content {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      height: 500px;
+      padding: 1rem;
+    }
+
+    .content h1 {
+      position: absolute;
+      top: 10%;
+      left: 20%;
+      font-family: "IBM Plex Sans", sans-serif;
+      font-weight: 600;
+      font-size: 3rem;
+      line-height: 1.20;
+      text-transform: uppercase;
+      text-align: center;
+      color: white;
+      max-width: 600px;
+      text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.35);
+    }
+
+    img {
+      position: absolute;
+      top: 5%;
+      left: 3%;
+    }
+
+    .content h1 span {
+
+      color: #ffe380;
+      font-size: 20px;
+    }
+
+    a {
+      color: black;
+      font-weight: 600;
+      font-size: 0.85em;
+      text-decoration: none;
+    }
+
+    label {
+      color: black;
+      font-weight: 600;
+      font-size: 0.85em;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    .container {
+      position: absolute;
+      top: 2%;
+      right: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .form {
+      display: flex;
+      width: auto;
+      background: #fff;
+      margin: 15px;
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0px 10px 25px 5px #0000000f;
+    }
+
+    .sign-in-section {
+      padding: 30px;
+    }
+
+    .sign-in-section h6 {
+      margin-top: 0px;
+      font-size: 0.75em;
+    }
+
+    .sign-in-section h1 {
+      text-align: center;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .sign-in-section h1:after {
+      position: absolute;
+      content: "";
+      height: 5px;
+      bottom: -15px;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      width: 40px;
+      background: #7F00FF;
+      background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);
+      background: linear-gradient(to right, #E100FF, #7F00FF);
+      -o-transition: 0.25s;
+      -ms-transition: 0.25s;
+      -moz-transition: 0.25s;
+      -webkit-transition: 0.25s;
+      transition: 0.25s;
+    }
+
+    .sign-in-section h1:hover:after {
+      width: 100px;
+    }
+
+    .sign-in-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    .sign-in-section ul>li {
+      display: inline-block;
+      padding: 10px;
+      font-size: 15px;
+      width: 20px;
+      text-align: center;
+      text-decoration: none;
+      margin: 5px 2px;
+      border-radius: 50%;
+      box-shadow: 0px 3px 1px #0000000f;
+      border: 1px solid #e2e2e2;
+    }
+
+    .sign-in-section p {
+      text-align: center;
+      font-size: 0.85em;
+    }
+
+    .form-field {
+      display: block;
+      width: 300px;
+      margin: 10px auto;
+    }
+
+    .form-field label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .form-field input[type="email"],
+    input[type="password"] {
+      width: -webkit-fill-available;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #e8e8e8;
+    }
+
+    .form-field input::placeholder {
+      color: #e8e8e8;
+    }
+
+    .form-field input:focus {
+      border: 1px solid #AE00FF;
+    }
+
+    .form-field input[type="checkbox"] {
+      display: inline-block;
+    }
+
+    .form-options {
+      display: block;
+      margin: auto;
+      width: 300px;
+    }
+
+    .checkbox-field {
+      display: inline-block;
+      float: left;
+    }
+
+    .form-options a {
+      float: right;
+      text-decoration: none;
+    }
+
+    .btn {
+      padding: 15px;
+      font-size: 1em;
+      width: 100%;
+      border-radius: 25px;
+      border: none;
+      margin: 20px 0px;
+    }
+
+    .btn-signin {
+      cursor: pointer;
+      background: #7F00FF;
+      background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);
+      background: linear-gradient(to right, #E100FF, #7F00FF);
+      box-shadow: 0px 5px 15px 5px #840fe440;
+      color: #fff;
+    }
+
+    .links a:nth-child(1) {
+      float: left;
+    }
+
+    .links a:nth-child(2) {
+      float: right;
+    }
+
+    @media (max-width: 600px) {
+      .content {
+        display: block;
+        width: 100%;
+      }
+
+      img {
+        width: 50%;
+      }
+
+      .text {
+        display: none;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: wrap;
+        justify-content: space-between;
+      }
+
+
+    }
+
+    @media (max-width: 360px) {
+      .content {
+        display: block;
+        width: 100%;
+        margin-top: -50px;
+      }
+
+      img {
+        width: 80%;
+        position: center;
+      }
+
+      .text {
+        display: none;
+      }
+
+      .container {
+
+        position: absolute;
+        top: 60%;
+        width: 350px;
+        left: 5%;
+      }
+
+      .form {
+        width: 280px;
+
+      }
+
+      .form-field {
+        width: 280px;
+      }
+
+      .sign-in-section {
+        width: 250px;
+      }
+
+      #email {
+        width: 230px;
+      }
+
+      #password {
+        width: 230px;
+      }
+
+      #email,
+      #password,
+      #rememberMe {
+        margin-left: -30px;
+      }
+
+      .buttom {
+        margin-left: -30px;
+      }
+
+      .form-options {
+        width: 100%;
+
+      }
+
+    }
+
+    @media (max-width: 760px) {
+      .content {
+        display: block;
+        width: 100%;
+        margin-top: -50px;
+      }
+
+      img {
+        width: 80%;
+        position: center;
+      }
+
+      .text {
+        display: none;
+      }
+
+      .container {
+
+        position: absolute;
+        top: 60%;
+        width: 350px;
+        left: 5%;
+      }
+
+      .form {
+        width: 280px;
+
+      }
+
+      .form-field {
+        width: 280px;
+      }
+
+      .sign-in-section {
+        width: 250px;
+      }
+
+      #email {
+        width: 230px;
+      }
+
+      #password {
+        width: 230px;
+      }
+
+      #email,
+      #password,
+      #rememberMe {
+        margin-left: -30px;
+      }
+
+      .buttom {
+        margin-left: -30px;
+      }
+
+      .form-options {
+        width: 100%;
+
+      }
+    }
+  </style>
+</head>
+
+<body onload="loadLogin()">
+  <nav>
+    <div class="largeNav">
+      <a href="/index.html" class="active">Home</a>
+      <!-- <a href="#">Services</a> -->
+      <a href="/index.html">About</a>
+      <a href="#">Contact</a>
+    </div>
+
+  </nav>
+  <header>
+
+    <div class="content">
+
+      <img src="StaySafe-07.png" width="400px" height="400px">
+      <h1 class="text" style="position: absolute; top: 85%; left: 5%;"> StaySafe, StayHome </h1>
+    </div>
+    <div class="stripes">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="container">
+      <div class="form">
+        <div class="sign-in-section">
+          <h1>Log in</h1>
+          <form>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="Email" />
+            </div>
+            <div class="form-field">
+              <label for="password">Password</label>
+              <input id="password" type="password" placeholder="Password" />
+            </div>
+            <!-- <div class="form-options">
+          <div class="checkbox-field">
+            <input id="rememberMe" type="checkbox" class="checkbox" />
+            <label for="rememberMe">Remember Me</label>
+          </div>
+          <a class="forgot_pass" href="#">Forgot Password?</a>
+        </div> -->
+            <div class="buttom">
+              <input id="submit" type="button" class="btn btn-signin" value="Submit" />
+            </div>
+            <!-- <button type="button" id="submit">Submit</button> -->
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+</body>
+
+</html>

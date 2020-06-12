@@ -13,9 +13,9 @@
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   <script src="/Dashboard/js/pages/login.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
 
   <style type="text/css">
-    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600&display=swap");
 
     * {
       box-sizing: border-box;
@@ -53,32 +53,6 @@
       color: #190934;
     }
 
-    @media screen and (max-width: 600px) {
-      .largeNav {
-        display: none;
-      }
-
-      details {
-        display: inline;
-        padding: 25px;
-        text-align: cetner;
-        width: 90%;
-        font-size: 24px;
-        margin-right: 25px;
-      }
-
-      details a {
-        display: grid;
-        justify-content: center;
-        text-align: center;
-      }
-
-      details a:hover {
-        background-color: #EBF7D4;
-        color: #190934;
-      }
-    }
-
     header {
       position: relative;
     }
@@ -95,8 +69,8 @@
       z-index: -1;
       height: 650px;
       width: 100%;
-      background: -webkit-gradient(linear, left bottom, left top, from(#2684ff), to(#0065ff));
-      background: linear-gradient(to top, #2684ff, #0065ff);
+      background: -webkit-gradient(linear, left bottom, left top, from(#ff8826), to(#ff5e00));
+      background: linear-gradient(to top, #ff7300b7, #ff730088);
     }
 
     .stripes>* {
@@ -106,7 +80,7 @@
 
     .stripes>*:nth-of-type(odd) {
       background: -webkit-gradient(linear, right top, left top, color-stop(35%, transparent), to(#b3d4ff));
-      background: linear-gradient(270deg, transparent 35%, #b3d4ff 100%);
+      background: linear-gradient(270deg, transparent 35%, #ffedb3 100%);
     }
 
     .stripes>*:nth-of-type(even) {
@@ -152,23 +126,24 @@
 
     .content h1 {
       position: absolute;
-      top: 10%;
-      left: 20%;
-      font-family: "IBM Plex Sans", sans-serif;
+      top: 90%;
+      left: 15%;
+      font-family: 'Satisfy', cursive;
       font-weight: 600;
       font-size: 3rem;
       line-height: 1.20;
-      text-transform: uppercase;
+      text-transform: initial;
       text-align: center;
-      color: white;
+      color: rgb(42, 5, 175);
       max-width: 600px;
-      text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.35);
+      text-shadow: 0px 0px 15px rgba(78, 133, 243, 0.35);
     }
 
     img {
       position: absolute;
+      width: 400px;
       top: 5%;
-      left: 3%;
+      left: 9%;
     }
 
     .content h1 span {
@@ -314,11 +289,6 @@
       width: 300px;
     }
 
-    .checkbox-field {
-      display: inline-block;
-      float: left;
-    }
-
     .form-options a {
       float: right;
       text-decoration: none;
@@ -335,9 +305,9 @@
 
     .btn-signin {
       cursor: pointer;
-      background: #7F00FF;
+      background: #1900ff;
       background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);
-      background: linear-gradient(to right, #E100FF, #7F00FF);
+      background: linear-gradient(to right, #1900ff, #8c00ff);
       box-shadow: 0px 5px 15px 5px #840fe440;
       color: #fff;
     }
@@ -350,90 +320,6 @@
       float: right;
     }
 
-    @media (max-width: 600px) {
-      .content {
-        display: block;
-        width: 100%;
-      }
-
-      img {
-        width: 50%;
-      }
-
-      .text {
-        display: none;
-      }
-
-      .container {
-        display: flex;
-        flex-direction: wrap;
-        justify-content: space-between;
-      }
-
-
-    }
-
-    @media (max-width: 360px) {
-      .content {
-        display: block;
-        width: 100%;
-        margin-top: -50px;
-      }
-
-      img {
-        width: 80%;
-        position: center;
-      }
-
-      .text {
-        display: none;
-      }
-
-      .container {
-
-        position: absolute;
-        top: 60%;
-        width: 350px;
-        left: 5%;
-      }
-
-      .form {
-        width: 280px;
-
-      }
-
-      .form-field {
-        width: 280px;
-      }
-
-      .sign-in-section {
-        width: 250px;
-      }
-
-      #email {
-        width: 230px;
-      }
-
-      #password {
-        width: 230px;
-      }
-
-      #email,
-      #password,
-      #rememberMe {
-        margin-left: -30px;
-      }
-
-      .buttom {
-        margin-left: -30px;
-      }
-
-      .form-options {
-        width: 100%;
-
-      }
-
-    }
 
     @media (max-width: 760px) {
       .content {
@@ -443,25 +329,32 @@
       }
 
       img {
-        width: 80%;
+        position: relative;
+        margin: 80px;
+        width: 200px;
         position: center;
       }
 
+      .content h1 {
+        margin: -110px auto 10px 90px;
+        font-size: 40px;
+      }
+
       .text {
-        display: none;
+        margin: 30vh 0  0  -50vw;
+        display: block;
       }
 
       .container {
-
         position: absolute;
+        margin: 0 auto 0 auto;
         top: 60%;
-        width: 350px;
+        width: 100px;
         left: 5%;
       }
 
       .form {
-        width: 280px;
-
+        width: 300px;
       }
 
       .form-field {
@@ -481,19 +374,17 @@
       }
 
       #email,
-      #password,
-      #rememberMe {
+      #password {
         margin-left: -30px;
       }
-
+/* 
       .buttom {
-        margin-left: -30px;
-      }
+        margin: 0 auto;
+      } */
 
-      .form-options {
+      /* .form-options {
         width: 100%;
-
-      }
+      } */
     }
   </style>
 </head>
@@ -511,9 +402,8 @@
   <header>
 
     <div class="content">
-
-      <img src="StaySafe-07.png" width="400px" height="400px">
-      <h1 class="text" style="position: absolute; top: 85%; left: 5%;"> StaySafe, StayHome </h1>
+      <img src="StaySafe-07.png">
+      <h1 class="text"> StaySafe</h1>
     </div>
     <div class="stripes">
       <span></span>
